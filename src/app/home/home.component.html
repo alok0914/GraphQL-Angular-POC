@@ -1,0 +1,50 @@
+<div class="container task-list">
+  <form class="post-form" [formGroup]="addPost" (ngSubmit)="addNewPost()">
+    <div class="form-group task-group">
+      <div class="form-group">
+        <textarea style="background-color:black;color:white;" placeholder="Title ......" rows="1" cols="80"
+          formControlName="title"></textarea>
+        <textarea style="background-color:black;color:white;" placeholder="Description ......" formControlName="body"
+          rows="4" cols="80">
+        </textarea>
+      </div>
+    </div>
+    <button class="btn btn-primary">Add New Post</button>
+  </form>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="panel panel-white post panel-shadow" *ngFor="let post of posts">
+        <div class="post-heading">
+          <div class="pull-left meta">
+            <div class="title h4">
+              <a href="#"><b>{{post.title}}</b></a>
+            </div>
+            <div class="title h4">
+              <a href="#"><b>{{post.body}}</b></a>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-white post panel-shadow" *ngFor="let comment of post.comments">
+          <div class="post-heading">
+            <div class="pull-left image">
+              <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+            </div>
+            <div class="pull-left meta">
+              <div>
+                <a class="title h5" href="#">{{comment.author.name}}</a> : <span>{{comment.text}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="post-form" [formGroup]="addComment" (ngSubmit)="addComments(post.id)">
+          <div class="form-group task-group">
+            <div class="form-group">
+              <textarea class="form-control task-textarea" rows="1" formControlName="description"></textarea>
+            </div>
+          </div>
+          <button class="btn btn-primary">Add Comment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
